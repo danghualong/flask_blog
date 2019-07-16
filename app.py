@@ -1,3 +1,3 @@
-from toolingset import createApp
+from . import createApp
 
 app=createApp()
