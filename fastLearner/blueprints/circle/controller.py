@@ -6,4 +6,4 @@ import os
 
 @circle_bp.route('/')
 def index():
-    return render_template('circle/index2.html')
+    return render_template('circle/index.html')

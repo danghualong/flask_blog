@@ -1,5 +1,5 @@
 __pycache__
 .venv
 .vscode
-blueprints/circle/__pycache__/__init__.cpython-36.pyc
-blueprints/circle/__pycache__/controller.cpython-36.pyc
+fastLearner/blueprints/circle/__pycache__
+fastLearner/blueprints/__pycache__
