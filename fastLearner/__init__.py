@@ -1,28 +1,43 @@
 
+import os
+import logging
+from logging.handlers import RotatingFileHandler
 from flask import Flask,render_template
 from fastLearner.blueprints.circle import circle_bp
 from fastLearner.blueprints.main import main_bp
-from .extensions import cache
+from .extensions import cache,db
+from .settings import configs
 
+baseDir=os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 
-def createApp():
+def createApp(configName=None):
     app=Flask(__name__)
-    app.config.from_pyfile('config.py')
-    initBlueprints(app)
-    initErrorHandlers(app)
-    initExtensions(app)
+    if configName is None:
+        configName=os.getenv('FLASK_ENV','development')
+    app.config.from_object(configs[configName])
+    registerLogging(app)
+    registerBlueprints(app)
+    registerErrorHandlers(app)
+    registerExtensions(app)
     return app
 
-def initBlueprints(app):
+def registerLogging(app):
+    formatter = logging.Formatter('[%(asctime)s][%(levelname)s] %(filename)s--%(funcName)s(%(lineno)s):%(message)s')
+    fh=RotatingFileHandler(os.path.join(baseDir,'logs/mylog.log'),maxBytes=10*1024*1024,backupCount=5)
+    fh.setLevel(logging.INFO)
+    fh.setFormatter(formatter)
+    app.logger.addHandler(fh)
+
+def registerBlueprints(app):
     app.register_blueprint(main_bp)
     app.register_blueprint(circle_bp,url_prefix='/circle')
 
-def initErrorHandlers(app):
+def registerErrorHandlers(app):
     @app.errorhandler(404)
     def nofound(code):
         return render_template('nofound.html'),404
 
-def initExtensions(app):
+def registerExtensions(app):
     cache.init_app(app)
-    
+    db.init_app(app)
         
