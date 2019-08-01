@@ -4,3 +4,4 @@ __pycache__
 fastLearner/blueprints/circle/__pycache__
 fastLearner/blueprints/__pycache__
 logs/*
+!logs/.gitkeep
