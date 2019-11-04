@@ -1,5 +1,6 @@
 __pycache__
 .venv
+.env
 .vscode
 fastLearner/blueprints/circle/__pycache__
 fastLearner/blueprints/__pycache__
