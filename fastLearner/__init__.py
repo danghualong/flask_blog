@@ -5,6 +5,7 @@ from logging.handlers import RotatingFileHandler
 from flask import Flask,render_template
 from fastLearner.blueprints.circle import circle_bp
 from fastLearner.blueprints.main import main_bp
+from fastLearner.blueprints.wechat import we_bp
 from .extensions import cache,db
 from .settings import configs
 
@@ -30,6 +31,7 @@ def registerLogging(app):
 
 def registerBlueprints(app):
     app.register_blueprint(main_bp)
+    app.register_blueprint(we_bp)
     app.register_blueprint(circle_bp,url_prefix='/circle')
 
 def registerErrorHandlers(app):
