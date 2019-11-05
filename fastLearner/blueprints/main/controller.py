@@ -1,4 +1,4 @@
-from flask import render_template
+from flask import render_template,current_app
 from .forms import RegisterForm
 from . import main_bp
 from ...extensions import cache
@@ -10,4 +10,5 @@ def register():
 
 @main_bp.route('/')
 def index():
+    current_app.logger.debug('index start')
     return render_template('main/index.html')
