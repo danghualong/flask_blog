@@ -8,10 +8,11 @@ pylint = "*"
 flask = "*"
 v = {editable = true,version = "*"}
 flask-wtf = "*"
+flask-cors = "*"
 
 [packages]
 flask-caching = "*"
 flask-sqlalchemy = "*"
 
 [requires]
-python_version = "3.6"
+python_version = "3.7"
