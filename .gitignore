@@ -1,7 +1,7 @@
 __pycache__
 .venv
+.env
 .vscode
 fastLearner/blueprints/circle/__pycache__
 fastLearner/blueprints/__pycache__
-logs/*
-!logs/.gitkeep
+logs

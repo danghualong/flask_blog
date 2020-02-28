@@ -5,7 +5,7 @@ from ...extensions import cache
 from fastLearner.exceptions import ProjException
 
 def getAllUsers():
-    return [{'id':1,'name':'åˆ˜å¤‡'},{'id':2,'name':'å…³ç¾½'},{'id':3,'name':'å¼ é£ž'}]
+    return [{'id':1,'name':'Áõ±¸'},{'id':2,'name':'¹ØÓð'},{'id':3,'name':'ÕÅ·É'}]
 
 
 @main_bp.route('/register')
