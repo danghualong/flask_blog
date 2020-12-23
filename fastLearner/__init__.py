@@ -6,7 +6,8 @@ from flask import Flask,render_template
 from fastLearner.blueprints.circle import circle_bp
 from fastLearner.blueprints.main import main_bp
 from fastLearner.blueprints.common import common_bp
-from .extensions import cache,db
+from fastLearner.extensions.cache_ext import cache
+from fastLearner.extensions.mysql_ext import db
 from .settings import configs
 
 baseDir=os.path.abspath(os.path.dirname(os.path.dirname(__file__)))

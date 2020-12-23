@@ -1,2 +1,2 @@
-from .extensions import db
+from .extensions.mysql_ext import db
 

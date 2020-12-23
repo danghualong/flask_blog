@@ -1,11 +1,11 @@
 from flask import render_template,current_app,request,json,make_response
 from .forms import RegisterForm
 from . import main_bp
-from ...extensions import cache
+from ...extensions.cache_ext import cache
 from fastLearner.exceptions import ProjException
 
 def getAllUsers():
-    return [{'id':1,'name':'¡ı±∏'},{'id':2,'name':'πÿ”'},{'id':3,'name':'’≈∑…'}]
+    return [{'id':1,'name':'danghualong'},{'id':2,'name':'liuyang'},{'id':3,'name':'lihai'}]
 
 
 @main_bp.route('/register')
