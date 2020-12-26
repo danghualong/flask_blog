@@ -1,9 +1,18 @@
+{% from './macros.html' import staticFile %}
 <!DOCTYPE html>
 <html>
     <head>
-        <title>NoFound</title>
+        {% set title='NOFound2' %}
+        <title>{{title}}</title>
+        {{ staticFile('icon','images/favicon.ico') }}
     </head>
     <body>
-        <h1>NoFound this Page!</h1>
+        {% set a=12 %}
+        {% set b=13 %}
+        {% if a is biggerThan b %}
+        <h1>I'm sorry</h1>
+        {% else %}
+        <h1>You're lost!</h1>
+        {% endif %}
     </body>
 </html>

@@ -9,6 +9,8 @@ from fastLearner.blueprints.common import common_bp
 from fastLearner.extensions.cache_ext import cache
 from fastLearner.extensions.mysql_ext import db
 from .settings import configs
+from .templates.util import filters
+from .templates.util import tests
 
 baseDir=os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 
@@ -22,6 +24,8 @@ def createApp(configName=None):
     registerErrorHandlers(app)
     registerExtensions(app)
     registerAfterRequest(app)
+    registerTemplateFilters(app)
+    registerTemplateTests(app)
     return app
 
 def registerLogging(app):
@@ -55,4 +59,9 @@ def registerAfterRequest(app):
         # resp.headers["Access-Control-Allow-Methods"] = "POST, GET, OPTIONS, DELETE"
         resp.headers["Access-Control-Allow-Headers"] = "token,userId,openUserId,xcm_admin_token,Content-Type,x-requested-with"
         return resp
-        
+
+def registerTemplateFilters(app):
+    app.jinja_env.filters['uppercase'] = filters.uppercase
+    
+def registerTemplateTests(app):
+    app.jinja_env.tests['biggerThan']=tests.biggerThan
