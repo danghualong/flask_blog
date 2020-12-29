@@ -13,7 +13,7 @@ class BaseConfig(object):
     CSRF_ENABLED=True
     SECRET_KEY = os.getenv('SECRET_KEY', 'Zench')
     CACHE_TYPE='simple'
-    SQLALCHEMY_TRACK_MODIFICATIONS=False
+    SQLALCHEMY_TRACK_MODIFICATIONS=True
 
 
 class DevelopmentConfig(BaseConfig):

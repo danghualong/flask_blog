@@ -1,3 +1,4 @@
 from fastLearner import createApp
 
-app=createApp()
+app = createApp()
+

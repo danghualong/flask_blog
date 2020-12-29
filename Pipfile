@@ -14,6 +14,7 @@ flask-cors = "*"
 flask-caching = "*"
 flask-sqlalchemy = "*"
 python-dotenv = "*"
+flask-mysqldb = "*"
 
 [requires]
 python_version = "3.7"
