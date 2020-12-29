@@ -17,7 +17,7 @@ class BaseConfig(object):
 
 
 class DevelopmentConfig(BaseConfig):
-    SQLALCHEMY_DATABASE_URI=prefix+os.path.join(baseDir,'data_dev.db')
+    SQLALCHEMY_DATABASE_URI=os.getenv('DATABASE_URI',prefix+os.path.join(baseDir,'data_dev.db'))
     
 class TestConfig(BaseConfig):
     SQLALCHEMY_DATABASE_URI=prefix+os.path.join(baseDir,'data_test.db')

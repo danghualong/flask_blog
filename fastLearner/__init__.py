@@ -12,6 +12,8 @@ from .settings import configs
 from .templates.util import filters
 from .templates.util import tests
 
+
+
 baseDir=os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 
 def createApp(configName=None):
@@ -51,6 +53,8 @@ def registerErrorHandlers(app):
 def registerExtensions(app):
     cache.init_app(app)
     db.init_app(app)
+    print(app.config['SQLALCHEMY_DATABASE_URI'])
+    db.create_all()
 
 def registerAfterRequest(app):
     @app.after_request
@@ -64,4 +68,14 @@ def registerTemplateFilters(app):
     app.jinja_env.filters['uppercase'] = filters.uppercase
     
 def registerTemplateTests(app):
-    app.jinja_env.tests['biggerThan']=tests.biggerThan
+    app.jinja_env.tests['biggerThan'] = tests.biggerThan
+    
+class User(db.Model):
+    __tablename__ = 'users'
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(80), unique=True)
+    email = db.Column(db.String(320), unique=True)
+    password = db.Column(db.String(32), nullable=False)
+
+    def __repr__(self):
+        return '<User %r>' % self.username
