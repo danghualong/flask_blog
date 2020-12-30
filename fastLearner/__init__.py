@@ -8,7 +8,8 @@ from . import extensions
 from . import models
 from . import errorhandlers
 from .templates.util import tests,filters
-from .tools import commands as cmd, shell_context_processors as scp
+from .flasktools import commands as cmd, shell_context_processors as scp
+
 
 def createApp(configName=None):
     app=Flask(__name__)

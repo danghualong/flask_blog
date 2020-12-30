@@ -1,5 +1,5 @@
 import click,os
-from fastLearner.extensions.db_ext import db
+from fastLearner.extensions import db
 
 # 自定义Flask命令
 def init_app(app):

@@ -1,7 +1,6 @@
 from flask import render_template,current_app,request,json,make_response
 from .forms import RegisterForm
 from . import main_bp
-from ...extensions.cache_ext import cache
 from fastLearner.exceptions import ProjException
 
 def getAllUsers():

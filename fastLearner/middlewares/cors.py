@@ -5,5 +5,4 @@ def init_app(app):
         resp.headers['Access-Control-Allow-Origin'] = '*'
         # resp.headers["Access-Control-Allow-Methods"] = "POST, GET, OPTIONS, DELETE"
         resp.headers["Access-Control-Allow-Headers"] = "token,userId,openUserId,xcm_admin_token,Content-Type,x-requested-with"
-        print(resp.data)
         return resp
