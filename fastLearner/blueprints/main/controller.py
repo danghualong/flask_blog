@@ -2,10 +2,8 @@ from flask import render_template,current_app,request,json,make_response
 from .forms import RegisterForm
 from . import main_bp
 from fastLearner.exceptions import ProjException
-
-def getAllUsers():
-    return [{'id':1,'name':'danghualong'},{'id':2,'name':'liuyang'},{'id':3,'name':'lihai'}]
-
+from fastLearner.models import User
+import fastLearner.utils as util 
 
 @main_bp.route('/register')
 def register():
@@ -16,15 +14,13 @@ def register():
 @main_bp.route('/users',methods=['POST'])
 def getUsers():
     try:
-        users=getAllUsers()
         # json1=json.loads(request.get_json())
-        json1=request.get_json()
-        if(json1!=None and 'id' in json1):
-            strId=str(json1["id"])
-            if(strId.isdigit()):
-                id=int(strId) 
-                users=list(filter(lambda x:x['id']==id,users))
-        return json.dumps(users)
+        json1 = request.get_json()
+        if(json1 and 'id' in json1):
+            strId = str(json1["id"])
+            id = int(strId)
+            users = User.query.filter(User.id == id).all()
+        return json.dumps(util.serialize(users))
     except Exception as pe:
         raise ProjException(pe.args,status_code=500)
         
