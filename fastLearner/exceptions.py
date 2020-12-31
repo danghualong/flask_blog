@@ -1,15 +1,15 @@
 
 class ProjException(Exception):
-    status_code=600
-    def __init__(self,message,status_code=None,payload=None):
+    def __init__(self,message,code=500):
         self.message=message
-        if(status_code is not None):
-            self.status_code=status_code
-        self.payload=payload
+        self.code=code
+
+class NormalResult(object):
+    def __init__(self, payload,code=200,message=None):
+        self.payload = payload
+        self.code = code
+        self.message = message
+
     
-    def to_dict(self):
-        result={}
-        result['message']=self.message
-        result['code']=self.status_code
-        return result
+
 

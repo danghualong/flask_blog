@@ -1,9 +1,10 @@
-from flask import render_template,current_app,request,json,make_response
+from flask import render_template,current_app,request,jsonify,make_response
 from .forms import RegisterForm
 from . import main_bp
-from fastLearner.exceptions import ProjException
+from fastLearner.exceptions import NormalResult,ProjException
 from fastLearner.models import User
-import fastLearner.utils as util 
+import fastLearner.tools.serializer as serializer
+import fastLearner.tools.encrypt as encrypt
 
 @main_bp.route('/register')
 def register():
@@ -11,18 +12,20 @@ def register():
     form=RegisterForm()
     return render_template('main/register.html',form=form)
 
-@main_bp.route('/users',methods=['POST'])
+@main_bp.route('/login',methods=['Post'])
 def getUsers():
     try:
-        # json1=json.loads(request.get_json())
         json1 = request.get_json()
-        if(json1 and 'id' in json1):
-            strId = str(json1["id"])
-            id = int(strId)
-            users = User.query.filter(User.id == id).all()
-        return json.dumps(util.serialize(users))
+        username = json1['name']
+        password=json1['pwd']
+        user = User.query.filter(User.username == username).first()
+        if (user):
+            if (password == user.password):
+                result = NormalResult(user)
+                return jsonify(serializer.serialize(result))
+        raise ProjException("用户信息不正确")
     except Exception as pe:
-        raise ProjException(pe.args,status_code=500)
+        raise ProjException(pe.args)
         
     
 
