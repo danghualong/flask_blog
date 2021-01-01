@@ -1,10 +1,11 @@
 from flask import render_template,current_app,request,jsonify,make_response
 from .forms import RegisterForm
 from . import main_bp
-from fastLearner.exceptions import NormalResult,ProjException
 from fastLearner.models import User
-import fastLearner.tools.serializer as serializer
+from fastLearner.json_response import build_response
+from fastLearner.blueprints.api import DHLException
 import fastLearner.tools.encrypt as encrypt
+import json
 
 @main_bp.route('/register')
 def register():
@@ -21,11 +22,10 @@ def getUsers():
         user = User.query.filter(User.username == username).first()
         if (user):
             if (password == user.password):
-                result = NormalResult(user)
-                return jsonify(serializer.serialize(result))
-        raise ProjException("用户信息不正确")
+                return build_response(user)
+        raise DHLException("用户信息不正确！")
     except Exception as pe:
-        raise ProjException(pe.args)
+        raise DHLException(pe.args)
         
     
 
