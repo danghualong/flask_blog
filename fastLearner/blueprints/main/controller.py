@@ -2,8 +2,7 @@ from flask import render_template,current_app,request,jsonify,make_response
 from .forms import RegisterForm
 from . import main_bp
 from fastLearner.models import User
-from fastLearner.json_response import build_response
-from fastLearner.blueprints.api import DHLException
+from fastLearner.json_response import build_response,DHLException
 import fastLearner.tools.encrypt as encrypt
 import json
 
