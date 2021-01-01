@@ -5,7 +5,7 @@ import time
 
 # 自定义Flask命令
 def init_app(app):
-    if (os.getenv('FLASK_ENV', 'development') != 'development'):
+    if (os.getenv('FLASK_ENV', 'production') == 'production'):
         return
     @app.cli.command("initdb")
     @click.option('--drop', help="是否删除旧数据库", is_flag=True)

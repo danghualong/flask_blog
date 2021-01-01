@@ -2,9 +2,10 @@ from flask import render_template,current_app,request,jsonify,make_response
 from .forms import RegisterForm
 from . import main_bp
 from fastLearner.models import User
-from fastLearner.json_response import build_response,DHLException
+from fastLearner.responsefactory import create_response
+from fastLearner.viewmodels import DHLException
 import fastLearner.tools.encrypt as encrypt
-import json
+
 
 @main_bp.route('/register')
 def register():
@@ -21,7 +22,7 @@ def getUsers():
         user = User.query.filter(User.username == username).first()
         if (user):
             if (password == user.password):
-                return build_response(user)
+                return create_response(user)
         raise DHLException("用户信息不正确！")
     except Exception as pe:
         raise DHLException(pe.args)

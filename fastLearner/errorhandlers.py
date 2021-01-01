@@ -1,6 +1,6 @@
 from flask import render_template, Blueprint,make_response
 from .tools.serializer import DHLEncoder
-from .json_response import DHLException
+from .viewmodels import DHLException
 import json
 
 def init_app(app):
